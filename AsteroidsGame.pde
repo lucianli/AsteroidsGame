@@ -1,34 +1,45 @@
 Spaceship ship;
-Star[] stars;
+Star[] galaxy;
+Asteroid[] belt;
 Planet[] system;
 public void setup() 
 {
  	size(600,600);
  	ship = new Spaceship();
- 	stars = new Star[200];
- 	for (int i=0; i<stars.length; i++) 
+ 	galaxy = new Star[200];
+ 	for (int i=0; i<galaxy.length; i++) 
  	{
-  		stars[i] = new Star();
+  		galaxy[i] = new Star();
  	}
  	system = new Planet[8];
  	for (int i=0; i<system.length; i++)
  	{
  		system[i] = new Planet();
  	}
+ 	belt = new Asteroid[10];
+ 	for (int i=0; i<belt.length; i++)
+ 	{
+ 		belt[i] = new Asteroid();
+ 	}
 }
 public void draw() 
 {
 	background(0);
- 	ship.show();
- 	ship.move();
- 	for (int i=0; i<stars.length; i++)
+	for (int i=0; i<galaxy.length; i++)
  	{
- 		stars[i].show();
+ 		galaxy[i].show();
  	}
  	for (int i=0; i<system.length; i++)
  	{
  		system[i].show();
  	}
+ 	for (int i=0; i<belt.length; i++)
+ 	{
+ 		belt[i].show();
+ 		belt[i].move();
+ 	}
+ 	ship.show();
+ 	ship.move();
 }
 public void keyPressed()
 {
@@ -68,7 +79,7 @@ class Planet
 	{
 		planetX = (int)(Math.random()*600);
 		planetY = (int)(Math.random()*600);
-		planetSize = (int)(Math.random()*10)+5;
+		planetSize = (int)(Math.random()*5)+8;
 		planetColor = color((int)(Math.random()*100)+70, (int)(Math.random()*100)+70, (int)(Math.random()*100)+70);
 	}
 	public void show()
