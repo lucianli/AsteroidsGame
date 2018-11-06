@@ -11,12 +11,12 @@ public void setup()
  	{
   		galaxy[i] = new Star();
  	}
- 	system = new Planet[8];
+ 	system = new Planet[10];
  	for (int i=0; i<system.length; i++)
  	{
  		system[i] = new Planet();
  	}
- 	belt = new Asteroid[10];
+ 	belt = new Asteroid[12];
  	for (int i=0; i<belt.length; i++)
  	{
  		belt[i] = new Asteroid();
