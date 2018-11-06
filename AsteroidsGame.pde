@@ -1,6 +1,6 @@
 Spaceship ship;
 Star[] galaxy;
-Asteroid[] belt;
+ArrayList<Asteroid> belt;
 Planet[] system;
 public void setup() 
 {
@@ -16,10 +16,10 @@ public void setup()
  	{
  		system[i] = new Planet();
  	}
- 	belt = new Asteroid[12];
- 	for (int i=0; i<belt.length; i++)
+ 	belt = new ArrayList<Asteroid>();
+ 	for (int i=0; i<12; i++)
  	{
- 		belt[i] = new Asteroid();
+ 		belt.add(new Asteroid());
  	}
 }
 public void draw() 
@@ -33,14 +33,21 @@ public void draw()
  	{
  		system[i].show();
  	}
- 	for (int i=0; i<belt.length; i++)
+ 	for (int i=0; i<belt.size(); i++)
  	{
- 		belt[i].show();
- 		belt[i].move();
+ 		belt.get(i).show();
+ 		belt.get(i).move();
  	}
  	ship.show();
  	ship.move();
-}
+ 	for (int j=0; j<belt.size(); j++)
+ 	{
+ 		if (dist(ship.getX(), ship.getY(), belt.get(j).getX(), belt.get(j).getY())<38)
+ 		{
+ 			belt.remove(j);
+ 		}
+ 	}
+ }
 public void keyPressed()
 {
 	if (key == 'w')
@@ -59,7 +66,7 @@ public void keyPressed()
 	{
 		ship.turn(10);
 	}
-	if (keyCode == 32)
+	if (key == 'q')
 	{
 		background(255);
 		ship.setX((int)(Math.random()*600));
@@ -80,7 +87,7 @@ class Planet
 		planetX = (int)(Math.random()*600);
 		planetY = (int)(Math.random()*600);
 		planetSize = (int)(Math.random()*5)+8;
-		planetColor = color((int)(Math.random()*100)+70, (int)(Math.random()*100)+70, (int)(Math.random()*100)+70);
+		planetColor = color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
 	}
 	public void show()
 	{
