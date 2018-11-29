@@ -52,11 +52,11 @@ public void keyPressed()
 {
 	if (key == 'w')
 	{
-		ship.accelerate(2);
+		ship.accelerate(1.2);
 	}
 	if (key == 's')
 	{
-		ship.accelerate(-1.8);
+		ship.accelerate(-1);
 	}
 	if (key == 'a')
 	{
