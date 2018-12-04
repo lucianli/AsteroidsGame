@@ -2,6 +2,7 @@ Spaceship ship;
 Star[] galaxy;
 ArrayList<Asteroid> belt;
 Planet[] system;
+ArrayList<Bullet> magazine;
 public void setup() 
 {
  	size(600,600);
@@ -21,6 +22,7 @@ public void setup()
  	{
  		belt.add(new Asteroid());
  	}
+ 	magazine = new ArrayList<Bullet>();
 }
 public void draw() 
 {
@@ -38,15 +40,33 @@ public void draw()
  		belt.get(i).show();
  		belt.get(i).move();
  	}
+ 	for (int i=0; i<magazine.size(); i++)
+ 	{
+ 		magazine.get(i).show();
+ 		magazine.get(i).move();
+ 	}
  	ship.show();
  	ship.move();
- 	for (int j=0; j<belt.size(); j++)
+ 	for (int i=0; i<belt.size(); i++)
  	{
- 		if (dist(ship.getX(), ship.getY(), belt.get(j).getX(), belt.get(j).getY())<38)
+ 		if (dist(ship.getX(), ship.getY(), belt.get(i).getX(), belt.get(i).getY())<38)
  		{
- 			belt.remove(j);
+ 			belt.remove(i);
  		}
  	}
+ 	for (int i=0; i<magazine.size(); i++)
+ 	{
+ 		for (int j=0; j<belt.size(); j++)
+ 		{
+ 			if (dist(magazine.get(i).getX(), magazine.get(i).getY(), belt.get(j).getX(), belt.get(j).getY())<30)
+ 			{
+ 				belt.remove(j);
+ 				magazine.remove(i);
+ 				break;
+ 			}
+ 		}
+ 	}
+
  }
 public void keyPressed()
 {
@@ -66,7 +86,7 @@ public void keyPressed()
 	{
 		ship.turn(10);
 	}
-	if (key == 'q')
+	if (key == 'h')
 	{
 		background(255);
 		ship.setX((int)(Math.random()*600));
@@ -74,6 +94,10 @@ public void keyPressed()
 		ship.setDirectionX(0);
 		ship.setDirectionY(0);
 		ship.setPointDirection((int)(Math.random()*360));
+	}
+	if (key == 'q')
+	{
+		magazine.add(new Bullet(ship));
 	}
 }
 class Planet
