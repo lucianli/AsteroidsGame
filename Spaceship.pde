@@ -115,7 +115,11 @@ class Spaceship extends Floater
       line(1,-10,6,-10);
       line(1,-8,6,-8);
     }
-    
+    myPointDirection = atan((float)((myCenterY-mouseY)/(myCenterX-mouseX)))*(180/Math.PI);
+    if (mouseX < myCenterX) 
+    {
+      myPointDirection = atan((float)((myCenterY-mouseY)/(myCenterX-mouseX)))*(180/Math.PI) + 180;
+    }
     //"unrotate" and "untranslate" in reverse order
     rotate(-1*dRadians);
     translate(-1*(float)myCenterX, -1*(float)myCenterY);

@@ -1,8 +1,10 @@
 Spaceship ship;
 Star[] galaxy;
 ArrayList<Asteroid> belt;
+ArrayList<SmallAst> debris;
 Planet[] system;
 ArrayList<Bullet> magazine;
+int score = 0;
 public void setup() 
 {
  	size(600,600);
@@ -23,6 +25,8 @@ public void setup()
  		belt.add(new Asteroid());
  	}
  	magazine = new ArrayList<Bullet>();
+ 	debris = new ArrayList<SmallAst>();
+ 	debris.add(new SmallAst(200,200));
 }
 public void draw() 
 {
@@ -45,6 +49,12 @@ public void draw()
  		magazine.get(i).show();
  		magazine.get(i).move();
  	}
+ 	for (int i=0; i<debris.size(); i++)
+ 	{
+ 		debris.get(i).show();
+ 		debris.get(i).move();
+ 	}
+
  	ship.show();
  	ship.move();
  	for (int i=0; i<belt.size(); i++)
@@ -52,7 +62,9 @@ public void draw()
  		if (dist(ship.getX(), ship.getY(), belt.get(i).getX(), belt.get(i).getY())<38)
  		{
  			belt.remove(i);
+ 			score = score - 5;
  		}
+
  	}
  	for (int i=0; i<magazine.size(); i++)
  	{
@@ -60,13 +72,19 @@ public void draw()
  		{
  			if (dist(magazine.get(i).getX(), magazine.get(i).getY(), belt.get(j).getX(), belt.get(j).getY())<30)
  			{
- 				belt.remove(j);
+ 				score = score + 10;
+ 				debris.add(new SmallAst(belt.get(j).getX(), belt.get(j).getY()));
+ 				debris.add(new SmallAst(belt.get(j).getX(), belt.get(j).getY()));
  				magazine.remove(i);
+ 				belt.remove(j);
+ 				belt.add(new Asteroid());
  				break;
  			}
  		}
  	}
-
+ 	fill(255);
+ 	textSize(20);
+ 	text("Score: " + score, 500, 50);
  }
 public void keyPressed()
 {
@@ -78,14 +96,6 @@ public void keyPressed()
 	{
 		ship.accelerate(-1);
 	}
-	if (key == 'a')
-	{
-		ship.turn(-10);
-	}
-	if (key == 'd')
-	{
-		ship.turn(10);
-	}
 	if (key == 'h')
 	{
 		background(255);
@@ -95,11 +105,12 @@ public void keyPressed()
 		ship.setDirectionY(0);
 		ship.setPointDirection((int)(Math.random()*360));
 	}
-	if (key == 'q')
+}
+public void mousePressed() 
 	{
 		magazine.add(new Bullet(ship));
 	}
-}
+
 class Planet
 {
 	private int planetX;
