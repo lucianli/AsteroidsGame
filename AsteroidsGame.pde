@@ -81,14 +81,14 @@ public void draw()
  				break;
  			}
  		}
- 	}
- 	for (int i=0; i<debris.size(); i++)
- 	{
- 		if (dist(magazine.get(i).getX(), magazine.get(i).getY(), belt.get(j).getX(), belt.get(j).getY())<25)
+ 		for (int k=0; k<debris.size(); k++)
  		{
- 			score = score + 5;
- 			debris.remove(i);
- 			break;
+ 			if (dist(magazine.get(i).getX(), magazine.get(i).getY(), debris.get(k).getX(), debris.get(k).getY())<25)
+ 			{
+	 			score = score + 5;
+	 			debris.remove(k);
+	 			break;
+ 			}
  		}
  	}
  	fill(255);
