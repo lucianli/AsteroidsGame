@@ -103,7 +103,7 @@ public void draw()
  	}
  	fill(255);
  	textSize(20);
- 	text("Score: " + score, 500, 50);
+ 	text("Score: " + score, 450, 50);
  }
 public void keyPressed()
 {
