@@ -82,6 +82,15 @@ public void draw()
  			}
  		}
  	}
+ 	for (int i=0; i<debris.size(); i++)
+ 	{
+ 		if (dist(magazine.get(i).getX(), magazine.get(i).getY(), belt.get(j).getX(), belt.get(j).getY())<25)
+ 		{
+ 			score = score + 5;
+ 			debris.remove(i);
+ 			break;
+ 		}
+ 	}
  	fill(255);
  	textSize(20);
  	text("Score: " + score, 500, 50);
