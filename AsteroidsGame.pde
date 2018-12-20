@@ -64,7 +64,14 @@ public void draw()
  			belt.remove(i);
  			score = score - 5;
  		}
-
+ 	}
+ 	for (int i=0; i<debris.size(); i++)
+ 	{
+ 		if (dist(ship.getX(), ship.getY(), debris.get(i).getX(), debris.get(i).getY())<36)
+ 		{
+ 			debris.remove(i);
+ 			score = score - 5;
+ 		}
  	}
  	for (int i=0; i<magazine.size(); i++)
  	{
