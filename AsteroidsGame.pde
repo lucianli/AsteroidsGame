@@ -81,15 +81,18 @@ public void draw()
  				break;
  			}
  		}
- 		for (int k=0; k<debris.size(); k++)
- 		{
- 			if (dist(magazine.get(i).getX(), magazine.get(i).getY(), debris.get(k).getX(), debris.get(k).getY())<25)
- 			{
-	 			score = score + 5;
-	 			debris.remove(k);
-	 			break;
- 			}
- 		}
+ 	}
+ 	for (int i=0; i<magazine.size(); i++)
+ 	{
+	 	for (int k=0; k<debris.size(); k++)
+	 	{
+			if (dist(magazine.get(i).getX(), magazine.get(i).getY(), debris.get(k).getX(), debris.get(k).getY())<25)
+			{
+				score = score + 5;
+				debris.remove(k);
+				break;
+			}
+	 	}
  	}
  	fill(255);
  	textSize(20);
